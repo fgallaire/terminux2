@@ -112,3 +112,153 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* ===== TERMINAL STYLES ===== */
+
+.terminal-window {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  height: 80vh;
+  max-height: 700px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 0 40px hsl(120 100% 50% / 0.08),
+    0 20px 60px hsl(0 0% 0% / 0.6),
+    inset 0 1px 0 hsl(120 60% 35% / 0.15);
+  display: flex;
+  flex-direction: column;
+  cursor: text;
+  background: hsl(var(--terminal-bg));
+  border: 1px solid hsl(120 60% 35% / 0.2);
+}
+
+.terminal-scanlines {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    hsl(0 0% 0% / 0.06) 2px,
+    hsl(0 0% 0% / 0.06) 4px
+  );
+}
+
+.terminal-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: hsl(120 10% 8%);
+  border-bottom: 1px solid hsl(120 60% 35% / 0.15);
+  flex-shrink: 0;
+}
+
+.terminal-titlebar-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.terminal-dot--red { background: hsl(0 70% 45%); }
+.terminal-dot--yellow { background: hsl(45 70% 45%); }
+.terminal-dot--green { background: hsl(120 70% 35%); }
+
+.terminal-titlebar-text {
+  font-family: var(--terminal-font);
+  font-size: 14px;
+  color: hsl(120 40% 50%);
+  letter-spacing: 0.5px;
+}
+
+.terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  font-family: var(--terminal-font);
+  font-size: 18px;
+  line-height: 1.5;
+  color: hsl(var(--terminal-green));
+  scrollbar-width: thin;
+  scrollbar-color: hsl(120 60% 25%) transparent;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 6px;
+}
+.terminal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.terminal-body::-webkit-scrollbar-thumb {
+  background: hsl(120 60% 25%);
+  border-radius: 3px;
+}
+
+.terminal-line {
+  white-space: pre-wrap;
+  word-break: break-all;
+  min-height: 1.5em;
+}
+
+.terminal-prompt {
+  color: hsl(var(--terminal-green-bright));
+  text-shadow: var(--terminal-glow);
+}
+
+.terminal-system {
+  color: hsl(var(--terminal-green-dim));
+}
+
+.terminal-output {
+  color: hsl(var(--terminal-green));
+  text-shadow: 0 0 6px hsl(120 100% 50% / 0.2);
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: hsl(var(--terminal-green-bright));
+  font-family: var(--terminal-font);
+  font-size: 18px;
+  line-height: 1.5;
+  caret-color: hsl(var(--terminal-green));
+  text-shadow: var(--terminal-glow);
+  padding: 0;
+}
+
+/* CRT flicker + glow animation */
+@keyframes terminal-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+}
+
+.terminal-window::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    hsl(0 0% 0% / 0.35) 100%
+  );
+  z-index: 5;
+}
