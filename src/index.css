@@ -6,8 +6,17 @@
 All colors MUST be HSL.
 */
 
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Fira+Code:wght@400;500&display=swap');
+
 @layer base {
   :root {
+    --terminal-bg: 120 10% 4%;
+    --terminal-green: 120 100% 50%;
+    --terminal-green-dim: 120 60% 35%;
+    --terminal-green-bright: 120 100% 70%;
+    --terminal-amber: 45 100% 50%;
+    --terminal-glow: 0 0 10px hsl(120 100% 50% / 0.4);
+    --terminal-font: 'VT323', 'Fira Code', monospace;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
