@@ -30,7 +30,12 @@ const Index = () => {
         </button>
       </div>
 
-      {mode === 'simulated' ? <Terminal /> : <V86Terminal />}
+      <div style={{ display: mode === 'simulated' ? 'block' : 'none' }}>
+        <Terminal />
+      </div>
+      <div style={{ display: mode === 'real' ? 'block' : 'none' }}>
+        <V86Terminal visible={mode === 'real'} />
+      </div>
     </div>
   );
 };
