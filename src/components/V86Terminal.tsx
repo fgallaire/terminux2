@@ -112,7 +112,7 @@ export default function V86Terminal() {
       // xterm input → v86 serial
       term.onData((data: string) => {
         for (let i = 0; i < data.length; i++) {
-          emulator.serial0_send(data.charCodeAt(i));
+          emulator.bus.send('serial0-input', data.charCodeAt(i));
         }
       });
 
